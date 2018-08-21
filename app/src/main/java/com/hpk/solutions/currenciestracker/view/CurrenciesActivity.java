@@ -1,6 +1,7 @@
 package com.hpk.solutions.currenciestracker.view;
 
 import android.databinding.DataBindingUtil;
+import android.databinding.ObservableList;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +11,7 @@ import com.hpk.solutions.currenciestracker.R;
 import com.hpk.solutions.currenciestracker.adapter.CurrenciesAdapter;
 import com.hpk.solutions.currenciestracker.databinding.ActivityCurrenciesBinding;
 import com.hpk.solutions.currenciestracker.model.Currency;
+import com.hpk.solutions.currenciestracker.utils.ListChangeCallback;
 
 import javax.inject.Inject;
 
@@ -43,6 +45,12 @@ public class CurrenciesActivity extends AppCompatActivity implements CurrenciesA
         adapter.setOnItemClickListener(this);
         binding.currenciesList.setLayoutManager(new LinearLayoutManager(this));
         binding.currenciesList.setAdapter(adapter);
+        viewModel.items.addOnListChangedCallback(new ListChangeCallback<Currency>() {
+            @Override
+            public void onChanged(ObservableList<Currency> sender) {
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
 
     @Override

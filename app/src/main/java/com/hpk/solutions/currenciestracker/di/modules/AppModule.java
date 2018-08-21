@@ -40,4 +40,10 @@ public class AppModule {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
     }
+
+    @Provides
+    @Singleton
+    HitBTCApi provideHitBTCApi(Retrofit retrofit) {
+        return retrofit.create(HitBTCApi.class);
+    }
 }

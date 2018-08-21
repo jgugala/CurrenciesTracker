@@ -1,9 +1,10 @@
 package com.hpk.solutions.currenciestracker.api;
 
-import java.util.Currency;
+import com.hpk.solutions.currenciestracker.model.Currency;
+
 import java.util.List;
 
-import retrofit2.Response;
+import retrofit2.Call;
 import retrofit2.http.GET;
 
 /**
@@ -12,8 +13,8 @@ import retrofit2.http.GET;
 
 public interface HitBTCApi {
 
-    public String BASE_URL = "https://api.hitbtc.com/";
+    String BASE_URL = "https://api.hitbtc.com/";
 
     @GET("api/2/public/symbol")
-    Response<List<Currency>> getCurrencySymbols();
+    Call<List<Currency>> getCurrencySymbols();
 }

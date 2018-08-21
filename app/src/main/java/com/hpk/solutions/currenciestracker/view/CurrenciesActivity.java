@@ -1,5 +1,6 @@
 package com.hpk.solutions.currenciestracker.view;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ObservableList;
 import android.support.v7.app.AppCompatActivity;
@@ -55,5 +56,8 @@ public class CurrenciesActivity extends AppCompatActivity implements CurrenciesA
 
     @Override
     public void onItemClick(View view, Currency item, int position) {
+        final Intent intent = new Intent(this, CurrencyDetailsActivity.class);
+        intent.putExtra(item.getId(), CurrencyDetailsActivity.EXTRA_TICKER_SYMBOL);
+        startActivity(intent);
     }
 }

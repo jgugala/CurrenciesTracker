@@ -1,13 +1,21 @@
 package com.hpk.solutions.currenciestracker.view;
 
+import android.databinding.ObservableArrayList;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.hpk.solutions.currenciestracker.api.HitBTCApi;
 import com.hpk.solutions.currenciestracker.model.Currency;
 
 import java.lang.reflect.Type;
 import java.util.List;
 
 import javax.inject.Inject;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * Created by jgugala on 2018-08-21.
@@ -368,13 +376,27 @@ public class CurrenciesViewModel {
             "  }\n" +
             "]";
 
+    private HitBTCApi hitBTCApi;
+
+    ObservableArrayList<Currency> items = new ObservableArrayList<>();
+
+
     @Inject
-    public CurrenciesViewModel() {
+    public CurrenciesViewModel(HitBTCApi hitBTCApi) {
+        this.hitBTCApi = hitBTCApi;
     }
 
-    List<Currency> getCurrencies() {
-        Gson gson = new Gson();
-        Type lisType = new TypeToken<List<Currency>>(){}.getType();
-        return gson.fromJson(API_RESPONSE, lisType);
+    void getCurrenciesFromApi() {
+        hitBTCApi.getCurrencySymbols().enqueue(callback);
     }
+
+    private Callback<List<Currency>> callback = new Callback<List<Currency>>() {
+        @Override
+        public void onResponse(Call<List<Currency>> call, Response<List<Currency>> response) {
+        }
+
+        @Override
+        public void onFailure(Call<List<Currency>> call, Throwable t) {
+        }
+    };
 }

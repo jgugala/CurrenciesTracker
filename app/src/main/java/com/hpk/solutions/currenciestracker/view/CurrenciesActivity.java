@@ -29,6 +29,7 @@ public class CurrenciesActivity extends AppCompatActivity implements CurrenciesA
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_currencies);
+        viewModel.getCurrenciesFromApi();
     }
 
     @Override
@@ -38,7 +39,7 @@ public class CurrenciesActivity extends AppCompatActivity implements CurrenciesA
     }
 
     private void initRecyclerView() {
-        adapter = new CurrenciesAdapter(viewModel.getCurrencies());
+        adapter = new CurrenciesAdapter(viewModel.items);
         adapter.setOnItemClickListener(this);
         binding.currenciesList.setLayoutManager(new LinearLayoutManager(this));
         binding.currenciesList.setAdapter(adapter);

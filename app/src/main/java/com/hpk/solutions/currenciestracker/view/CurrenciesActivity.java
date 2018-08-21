@@ -57,7 +57,7 @@ public class CurrenciesActivity extends AppCompatActivity implements CurrenciesA
     @Override
     public void onItemClick(View view, Currency item, int position) {
         final Intent intent = new Intent(this, CurrencyDetailsActivity.class);
-        intent.putExtra(item.getId(), CurrencyDetailsActivity.EXTRA_TICKER_SYMBOL);
+        intent.putExtra(CurrencyDetailsActivity.EXTRA_TICKER_SYMBOL, item.getId());
         startActivity(intent);
     }
 }

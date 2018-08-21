@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.hpk.solutions.currenciestracker.R;
+import com.hpk.solutions.currenciestracker.databinding.ActivityCurrencyDetailsBinding;
 
 import dagger.android.AndroidInjection;
 
@@ -20,6 +21,11 @@ public class CurrencyDetailsActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
-        DataBindingUtil.setContentView(this, R.layout.activity_currency_details);
+        ActivityCurrencyDetailsBinding binding =
+                DataBindingUtil.setContentView(this, R.layout.activity_currency_details);
+        setTitle("Currency Details");
+
+        final String tickerSymbol = getIntent().getStringExtra(EXTRA_TICKER_SYMBOL);
+        binding.tickerSymbol.setText(tickerSymbol);
     }
 }

@@ -46,6 +46,5 @@ public class CurrenciesActivity extends AppCompatActivity implements CurrenciesA
 
     @Override
     public void onItemClick(View view, Currency item, int position) {
-        int a = 0;
     }
 }

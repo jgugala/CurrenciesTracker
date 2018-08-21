@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.hpk.solutions.currenciestracker.CurrenciesTrackerApp;
 import com.hpk.solutions.currenciestracker.di.modules.ActivityModule;
+import com.hpk.solutions.currenciestracker.di.modules.AppModule;
 
 import javax.inject.Singleton;
 
@@ -12,7 +13,7 @@ import dagger.Component;
 import dagger.android.support.AndroidSupportInjectionModule;
 
 @Singleton
-@Component(modules = {AndroidSupportInjectionModule.class, ActivityModule.class})
+@Component(modules = {AndroidSupportInjectionModule.class, ActivityModule.class, AppModule.class})
 public interface AppComponent {
 
     @Component.Builder

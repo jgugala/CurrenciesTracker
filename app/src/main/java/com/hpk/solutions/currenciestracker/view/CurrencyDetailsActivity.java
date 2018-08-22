@@ -32,6 +32,7 @@ public class CurrencyDetailsActivity extends AppCompatActivity {
 
         final String tickerSymbol = getIntent().getStringExtra(EXTRA_TICKER_SYMBOL);
         binding.tickerSymbol.setText(tickerSymbol);
+        binding.setViewModel(viewModel);
 
         viewModel.setTickerSymbol(tickerSymbol);
         viewModel.subscribeTicker();

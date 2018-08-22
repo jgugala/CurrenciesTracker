@@ -15,6 +15,8 @@ public interface HitBTCApi {
 
     String BASE_URL = "https://api.hitbtc.com/";
 
+    String SOCKET_URL = "wss://api.hitbtc.com/api/2/ws";
+
     @GET("api/2/public/symbol")
     Call<List<Currency>> getCurrencySymbols();
 }

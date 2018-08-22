@@ -2,7 +2,9 @@ package com.hpk.solutions.currenciestracker.view;
 
 import android.support.annotation.Nullable;
 
+import com.google.gson.Gson;
 import com.hpk.solutions.currenciestracker.api.HitBTCApi;
+import com.hpk.solutions.currenciestracker.api.TickerApiRequest;
 
 import javax.inject.Inject;
 
@@ -21,20 +23,35 @@ public class CurrencyDetailsViewModel {
 
     private OkHttpClient client;
 
+    private Gson gson;
+
     private WebSocket webSocket;
 
+    private String tickerSymbol;
+
     @Inject
-    public CurrencyDetailsViewModel(OkHttpClient client) {
+    public CurrencyDetailsViewModel(OkHttpClient client, Gson gson) {
         this.client = client;
+        this.gson = gson;
+    }
+
+    public void setTickerSymbol(String tickerSymbol) {
+        this.tickerSymbol = tickerSymbol;
     }
 
     public void subscribeTicker() {
         final Request request = new Request.Builder().url(HitBTCApi.SOCKET_URL).build();
         webSocket = client.newWebSocket(request, webSocketListener);
+        webSocket.send(createMessage(tickerSymbol));
     }
 
     public void unsubscribeTicker() {
         webSocket.close(SOCKET_CLOSE_CODE, "Component destroyed");
+    }
+
+    private String createMessage(String tickerSymbol) {
+        final TickerApiRequest tickerApiRequest = new TickerApiRequest(tickerSymbol);
+        return gson.toJson(tickerApiRequest);
     }
 
     private WebSocketListener webSocketListener = new WebSocketListener() {

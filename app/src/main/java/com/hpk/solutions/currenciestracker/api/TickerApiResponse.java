@@ -13,7 +13,7 @@ public class TickerApiResponse {
 
     private Ticker params;
 
-    public Ticker getParams() {
+    public Ticker getTicker() {
         return params;
     }
 }

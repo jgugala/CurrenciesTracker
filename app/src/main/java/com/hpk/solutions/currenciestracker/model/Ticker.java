@@ -13,7 +13,15 @@ public class Ticker {
         this.ask = ask;
     }
 
+    public void setBid(double bid) {
+        this.bid = bid;
+    }
+
     public double getAsk() {
         return ask;
+    }
+
+    public double getBid() {
+        return bid;
     }
 }

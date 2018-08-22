@@ -28,12 +28,12 @@ public class CurrencyDetailsViewModel {
         this.client = client;
     }
 
-    public void subscribeToTicker() {
+    public void subscribeTicker() {
         final Request request = new Request.Builder().url(HitBTCApi.SOCKET_URL).build();
         webSocket = client.newWebSocket(request, webSocketListener);
     }
 
-    public void unsubscribeFromTicker() {
+    public void unsubscribeTicker() {
         webSocket.close(SOCKET_CLOSE_CODE, "Component destroyed");
     }
 

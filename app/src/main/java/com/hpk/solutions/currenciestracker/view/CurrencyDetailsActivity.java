@@ -33,12 +33,12 @@ public class CurrencyDetailsActivity extends AppCompatActivity {
         final String tickerSymbol = getIntent().getStringExtra(EXTRA_TICKER_SYMBOL);
         binding.tickerSymbol.setText(tickerSymbol);
 
-        viewModel.subscribeToTicker();
+        viewModel.subscribeTicker();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        viewModel.unsubscribeFromTicker();
+        viewModel.unsubscribeTicker();
     }
 }

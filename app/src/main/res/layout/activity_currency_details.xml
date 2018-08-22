@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.hpk.solutions.currenciestracker.view.CurrencyDetailsViewModel" />
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,7 +17,7 @@
             android:id="@+id/ticker_symbol"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TICKER SYMBOL"/>
+            android:text="@{viewModel.tickerAsk}"/>
 
     </LinearLayout>
 

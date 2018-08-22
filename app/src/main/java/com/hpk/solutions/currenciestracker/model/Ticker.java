@@ -1,9 +1,9 @@
-package com.hpk.solutions.currenciestracker.api;
+package com.hpk.solutions.currenciestracker.model;
 
 /**
  * Created by $USER_NAME on 22.08.18.
  */
-public class TickerApiResponseParams {
+public class Ticker {
 
     private double ask;
 

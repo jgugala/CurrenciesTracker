@@ -1,5 +1,7 @@
 package com.hpk.solutions.currenciestracker.api;
 
+import com.hpk.solutions.currenciestracker.model.Ticker;
+
 /**
  * Created by $USER_NAME on 22.08.18.
  */
@@ -9,9 +11,9 @@ public class TickerApiResponse {
 
     private String method;
 
-    private TickerApiResponseParams params;
+    private Ticker params;
 
-    public TickerApiResponseParams getParams() {
+    public Ticker getParams() {
         return params;
     }
 }

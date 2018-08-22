@@ -28,7 +28,6 @@ public class CurrencyDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ActivityCurrencyDetailsBinding binding =
                 DataBindingUtil.setContentView(this, R.layout.activity_currency_details);
-        setTitle("Currency Details");
 
         final String tickerSymbol = getIntent().getStringExtra(EXTRA_TICKER_SYMBOL);
         binding.tickerSymbol.setText(tickerSymbol);

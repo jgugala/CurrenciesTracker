@@ -5,9 +5,19 @@ package com.hpk.solutions.currenciestracker.model;
  */
 public class Ticker {
 
+    private String symbol;
+
     private double ask;
 
     private double bid;
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
+
+    public String getSymbol() {
+        return symbol;
+    }
 
     public void setAsk(double ask) {
         this.ask = ask;

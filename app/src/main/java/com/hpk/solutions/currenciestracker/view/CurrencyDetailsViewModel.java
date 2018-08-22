@@ -31,9 +31,7 @@ public class CurrencyDetailsViewModel extends BaseObservable {
 
     private WebSocket webSocket;
 
-    private String tickerSymbol;
-
-    private Ticker ticker;
+    private Ticker ticker = new Ticker();
 
     @Inject
     public CurrencyDetailsViewModel(OkHttpClient client, Gson gson) {
@@ -42,14 +40,13 @@ public class CurrencyDetailsViewModel extends BaseObservable {
     }
 
     public void setTickerSymbol(String tickerSymbol) {
-        ticker = new Ticker();
-        this.tickerSymbol = tickerSymbol;
+        ticker.setSymbol(tickerSymbol);
     }
 
     public void subscribeTicker() {
         final Request request = new Request.Builder().url(HitBTCApi.SOCKET_URL).build();
         webSocket = client.newWebSocket(request, webSocketListener);
-        webSocket.send(createMessage(tickerSymbol));
+        webSocket.send(createMessage(ticker.getSymbol()));
     }
 
     public void unsubscribeTicker() {

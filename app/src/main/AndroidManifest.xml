@@ -20,7 +20,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".view.CurrencyDetailsActivity" />
+        <activity android:name=".view.CurrencyDetailsActivity"
+            android:label="@string/activity_details_name"/>
 
     </application>
 

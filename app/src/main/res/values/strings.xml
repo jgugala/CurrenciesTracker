@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Currencies Tracker</string>
+    <string name="activity_details_name">Currency Details</string>
 </resources>

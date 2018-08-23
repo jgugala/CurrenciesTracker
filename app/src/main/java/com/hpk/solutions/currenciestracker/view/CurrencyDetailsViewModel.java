@@ -3,6 +3,7 @@ package com.hpk.solutions.currenciestracker.view;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 
 import com.google.gson.Gson;
 import com.hpk.solutions.currenciestracker.api.HitBTCApi;
@@ -29,9 +30,11 @@ public class CurrencyDetailsViewModel extends BaseObservable {
 
     private Gson gson;
 
-    private WebSocket webSocket;
+    @VisibleForTesting
+    WebSocket webSocket;
 
-    private Ticker ticker = new Ticker();
+    @VisibleForTesting
+    Ticker ticker = new Ticker();
 
     @Inject
     public CurrencyDetailsViewModel(OkHttpClient client, Gson gson) {
@@ -68,7 +71,8 @@ public class CurrencyDetailsViewModel extends BaseObservable {
         return String.valueOf(ticker.getBid());
     }
 
-    private void updateTicker(Ticker ticker) {
+    @VisibleForTesting
+    void updateTicker(Ticker ticker) {
         if (this.ticker.getAsk() != ticker.getAsk()) {
             this.ticker.setAsk(ticker.getAsk());
             notifyChange();

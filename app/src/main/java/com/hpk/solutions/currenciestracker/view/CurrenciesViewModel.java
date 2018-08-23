@@ -21,6 +21,10 @@ import retrofit2.Response;
 
 public class CurrenciesViewModel {
 
+    interface RequestCallback {
+        void onFailure(String errorMessage);
+    }
+
     private HitBTCApi hitBTCApi;
 
     ObservableArrayList<Currency> items = new ObservableArrayList<>();
@@ -29,9 +33,15 @@ public class CurrenciesViewModel {
 
     private Call<List<Currency>> call;
 
+    private RequestCallback requestCallback;
+
     @Inject
     public CurrenciesViewModel(HitBTCApi hitBTCApi) {
         this.hitBTCApi = hitBTCApi;
+    }
+
+    public void setRequestCallback(RequestCallback requestCallback) {
+        this.requestCallback = requestCallback;
     }
 
     void getCurrenciesFromApi() {
@@ -54,6 +64,8 @@ public class CurrenciesViewModel {
         @Override
         public void onFailure(@NonNull Call<List<Currency>> call, @NonNull Throwable t) {
             inProgress.set(false);
+            requestCallback.onFailure(t.getMessage());
+            t.printStackTrace();
         }
     };
 }

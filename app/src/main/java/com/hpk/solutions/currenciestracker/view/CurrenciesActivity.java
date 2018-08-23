@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+import android.widget.Toast;
 
 import com.hpk.solutions.currenciestracker.R;
 import com.hpk.solutions.currenciestracker.adapter.CurrenciesAdapter;
@@ -19,7 +20,7 @@ import javax.inject.Inject;
 
 import dagger.android.AndroidInjection;
 
-public class CurrenciesActivity extends AppCompatActivity implements CurrenciesAdapter.OnItemClickListener {
+public class CurrenciesActivity extends AppCompatActivity implements CurrenciesAdapter.OnItemClickListener, CurrenciesViewModel.RequestCallback {
 
     private CurrenciesAdapter adapter;
 
@@ -34,6 +35,7 @@ public class CurrenciesActivity extends AppCompatActivity implements CurrenciesA
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_currencies);
         binding.setViewModel(viewModel);
+        viewModel.setRequestCallback(this);
         viewModel.getCurrenciesFromApi();
     }
 
@@ -74,4 +76,9 @@ public class CurrenciesActivity extends AppCompatActivity implements CurrenciesA
                     adapter.notifyDataSetChanged();
                 }
             };
+
+    @Override
+    public void onFailure(String errorMessage) {
+        Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
+    }
 }

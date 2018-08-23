@@ -13,6 +13,7 @@ import com.hpk.solutions.currenciestracker.adapter.CurrenciesAdapter;
 import com.hpk.solutions.currenciestracker.databinding.ActivityCurrenciesBinding;
 import com.hpk.solutions.currenciestracker.model.Currency;
 import com.hpk.solutions.currenciestracker.utils.ListChangeCallback;
+import com.hpk.solutions.currenciestracker.utils.RecyclerItemDecoration;
 
 import javax.inject.Inject;
 
@@ -45,6 +46,8 @@ public class CurrenciesActivity extends AppCompatActivity implements CurrenciesA
         adapter = new CurrenciesAdapter(viewModel.items);
         adapter.setOnItemClickListener(this);
         binding.currenciesList.setLayoutManager(new LinearLayoutManager(this));
+        binding.currenciesList.addItemDecoration(
+                new RecyclerItemDecoration(this, R.drawable.divider));
         binding.currenciesList.setAdapter(adapter);
         viewModel.items.addOnListChangedCallback(new ListChangeCallback<Currency>() {
             @Override

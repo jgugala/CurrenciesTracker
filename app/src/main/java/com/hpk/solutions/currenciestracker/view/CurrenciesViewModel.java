@@ -1,6 +1,7 @@
 package com.hpk.solutions.currenciestracker.view;
 
 import android.databinding.ObservableArrayList;
+import android.databinding.ObservableBoolean;
 import android.support.annotation.NonNull;
 
 import com.hpk.solutions.currenciestracker.api.HitBTCApi;
@@ -24,6 +25,8 @@ public class CurrenciesViewModel {
 
     ObservableArrayList<Currency> items = new ObservableArrayList<>();
 
+    public ObservableBoolean inProgress = new ObservableBoolean(true);
+
     @Inject
     public CurrenciesViewModel(HitBTCApi hitBTCApi) {
         this.hitBTCApi = hitBTCApi;
@@ -38,10 +41,12 @@ public class CurrenciesViewModel {
         public void onResponse(@NonNull Call<List<Currency>> call, @NonNull Response<List<Currency>> response) {
             items.clear();
             items.addAll(response.body());
+            inProgress.set(false);
         }
 
         @Override
         public void onFailure(@NonNull Call<List<Currency>> call, @NonNull Throwable t) {
+            inProgress.set(false);
         }
     };
 }

@@ -33,6 +33,7 @@ public class CurrenciesActivity extends AppCompatActivity implements CurrenciesA
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_currencies);
+        binding.setViewModel(viewModel);
         viewModel.getCurrenciesFromApi();
     }
 

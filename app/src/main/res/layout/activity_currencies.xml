@@ -1,12 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/currencies_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbarSize="5dp"
-        android:scrollbarThumbVertical="@android:color/darker_gray"
-        android:scrollbars="vertical" />
+    <data>
 
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.hpk.solutions.currenciestracker.view.CurrenciesViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/currencies_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbarSize="5dp"
+            android:scrollbarThumbVertical="@android:color/darker_gray"
+            android:scrollbars="vertical" />
+
+        <ProgressBar
+            android:id="@+id/progress"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="start"
+            android:visibility="@{viewModel.inProgress ? View.VISIBLE : View.GONE}" />
+
+    </RelativeLayout>
 </layout>

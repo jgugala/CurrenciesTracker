@@ -27,13 +27,20 @@ public class CurrenciesViewModel {
 
     public ObservableBoolean inProgress = new ObservableBoolean(true);
 
+    private Call<List<Currency>> call;
+
     @Inject
     public CurrenciesViewModel(HitBTCApi hitBTCApi) {
         this.hitBTCApi = hitBTCApi;
     }
 
     void getCurrenciesFromApi() {
-        hitBTCApi.getCurrencySymbols().enqueue(callback);
+        call = hitBTCApi.getCurrencySymbols();
+        call.enqueue(callback);
+    }
+
+    void cancelRequest() {
+        call.cancel();
     }
 
     private Callback<List<Currency>> callback = new Callback<List<Currency>>() {

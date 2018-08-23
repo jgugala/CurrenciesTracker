@@ -43,6 +43,13 @@ public class CurrenciesActivity extends AppCompatActivity implements CurrenciesA
         initRecyclerView();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        viewModel.cancelRequest();
+        viewModel.items.removeOnListChangedCallback(listChangedCallback);
+    }
+
     private void initRecyclerView() {
         adapter = new CurrenciesAdapter(viewModel.items);
         adapter.setOnItemClickListener(this);
@@ -50,12 +57,7 @@ public class CurrenciesActivity extends AppCompatActivity implements CurrenciesA
         binding.currenciesList.addItemDecoration(
                 new RecyclerItemDecoration(this, R.drawable.divider));
         binding.currenciesList.setAdapter(adapter);
-        viewModel.items.addOnListChangedCallback(new ListChangeCallback<Currency>() {
-            @Override
-            public void onChanged(ObservableList<Currency> sender) {
-                adapter.notifyDataSetChanged();
-            }
-        });
+        viewModel.items.addOnListChangedCallback(listChangedCallback);
     }
 
     @Override
@@ -64,4 +66,12 @@ public class CurrenciesActivity extends AppCompatActivity implements CurrenciesA
         intent.putExtra(CurrencyDetailsActivity.EXTRA_TICKER_SYMBOL, item.getId());
         startActivity(intent);
     }
+
+    private ObservableList.OnListChangedCallback listChangedCallback =
+            new ListChangeCallback<Currency>() {
+                @Override
+                public void onChanged(ObservableList sender) {
+                    adapter.notifyDataSetChanged();
+                }
+            };
 }
